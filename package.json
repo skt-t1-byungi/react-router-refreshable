@@ -1,0 +1,26 @@
+{
+    "name": "react-router-refreshable",
+    "description": "",
+    "version": "0.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/skt-t1-byungi/react-router-refreshable.git",
+    "author": "skt-t1-byungi <tiniwz@gmail.com>",
+    "scripts": {},
+    "keywords": [],
+    "license": "MIT",
+    "devDependencies": {
+        "@types/react": "^17.0.15",
+        "@types/react-router-dom": "^5.1.8",
+        "prettier": "^2.3.2",
+        "react": "^17.0.2",
+        "react-router-dom": "^5.2.0",
+        "typescript": "^4.3.5"
+    },
+    "peerDependencies": {
+        "react": ">=16",
+        "react-router-dom": "^5.2.0"
+    },
+    "dependencies": {
+        "use-previous": "^1.1.0"
+    }
+}
