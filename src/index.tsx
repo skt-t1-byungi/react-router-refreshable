@@ -1,8 +1,8 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useLayoutEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import usePrevious from 'use-previous'
 
-export default function Refereshable({ children }: { children: ReactNode }) {
+export default function Refreshable({ children }: { children: ReactNode }) {
     const curr = useLocation()
     const prev = usePrevious(curr)
     const [isBlank, setIsBlank] = useState(false)
@@ -14,7 +14,7 @@ export default function Refereshable({ children }: { children: ReactNode }) {
         prev.state === curr.state &&
         prev.key !== curr.key
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (isRefreshRender) {
             setIsBlank(true)
         } else if (isBlank) {
