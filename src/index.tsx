@@ -32,7 +32,6 @@ export default function Refreshable({ children, on }: PropsWithChildren<{ on?: (
         prev &&
         prev.pathname === curr.pathname &&
         prev.search === curr.search &&
-        prev.state === curr.state &&
         prev.key !== curr.key
 
     if (isRefreshRender) {
