@@ -38,6 +38,8 @@ export default function Refreshable({ children, on }: PropsWithChildren<{ on?: (
     if (isRefreshRender) {
         isRefreshingRef.current = true
     }
+
+    // Parent hook runs later than child hook
     useEffect(() => {
         if (!isRefreshRender && isRefreshingRef.current) {
             isRefreshingRef.current = false
@@ -45,13 +47,13 @@ export default function Refreshable({ children, on }: PropsWithChildren<{ on?: (
     })
 
     const forceUpdate = useForceUpdate()
-    const listenerRef = useRef(on)
-    listenerRef.current = on
+    const onRef = useRef(on)
+    onRef.current = on
 
     useLayoutEffect(() => {
         if (isRefreshRender) {
             forceUpdate()
-            listenerRef.current?.()
+            onRef.current?.()
         }
     }, [isRefreshRender])
 
