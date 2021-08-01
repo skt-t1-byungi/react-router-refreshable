@@ -1,7 +1,7 @@
 {
     "name": "react-router-refreshable",
     "description": "Supports refresh (remount) on react-router-dom",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "keywords": [
         "react",
         "react-router",
@@ -15,11 +15,11 @@
     "files": [
         "dist/"
     ],
-    "main": "dist/cjs/index.js",
+    "main": "dist/cjs/cjs/index.js",
     "module": "dist/esm/index.js",
     "exports": {
         ".": {
-            "require": "./dist/cjs/index.js",
+            "require": "./dist/cjs/cjs/index.js",
             "import": "./dist/esm/index.js"
         }
     },
