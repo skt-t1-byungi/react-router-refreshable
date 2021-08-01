@@ -2,17 +2,15 @@
 
 Supports refresh (remount) on react-router-dom
 
+[![version](https://flat.badgen.net/npm/v/react-router-refreshable)](https://www.npmjs.com/package/react-router-refreshable)
+
 ## Install
 
 ```sh
 npm i react-router-refreshable
 ```
 
-## Description
-
-When the user clicks on a link with the same address as the current address on the react-router, nothing happens. However, most users expect the page to refresh. Solving with `location.reload()` is wasteful.
-
-The `Refreshable` component of `react-router-refreshable` remounts `children` when `history.push` to the same address. It is possible to efficiently provide the user's expected result.
+## Example
 
 ```js
 import Refreshable from 'react-router-refreshable'
@@ -34,6 +32,16 @@ import Refreshable from 'react-router-refreshable'
 </Layout>
 ```
 
+## Description
+
+When the user clicks on a link with the same address as the current address on the react-router, nothing happens. However, most users expect the page to refresh. Solving with `location.reload()` is wasteful.
+
+The `Refreshable` component of `react-router-refreshable` remounts `children` when `history.push` to the same address. It is possible to efficiently provide the user's expected result.
+
+**[Demo](https://codesandbox.io/s/react-router-refreshable-demo-cw8gj?file=/src/App.js)**
+
+### Nested Refreshable
+
 Each page may have different areas to expect to refresh. Nested Refreshables can dynamically narrow the refresh area.
 
 ```jsx
@@ -51,10 +59,39 @@ Each page may have different areas to expect to refresh. Nested Refreshables can
 </Refreshable>
 ```
 
+### `on` event listener
+
 There is an `on` property that triggers when the refresh is started.
 
 ```jsx
 <Refreshable on={() => console.log('Start refreshing!')}>{/* ... */}</Refreshable>
+```
+
+### useIsRefreshingRef()
+
+`useIsRefreshingRef()` returns a `RefObject` indicating whether it is refreshing. Although not recommended, ignoring some logic in the effects hook can improve performance.
+
+```js
+import { useIsRefreshingRef } from 'react-router-refreshable'
+```
+
+```js
+function Page() {
+    const isRefreshingRef = useIsRefreshingRef()
+
+    useEffect(() => {
+        if (!isRefreshingRef.current) {
+            /* ... Run only when not refresh */
+        }
+        return () => {
+            if (!isRefreshingRef.current) {
+                /* ... Run only when not refresh */
+            }
+        }
+    }, [])
+
+    /* ... */
+}
 ```
 
 ## License
