@@ -5,14 +5,16 @@ import usePrevious from 'use-previous'
 const ctx = createContext(() => {})
 
 export default function Refreshable({ children, on }: { children?: ReactNode; on?: () => void }) {
-    const countRef = useRef(0)
-    const currGatherer = useRef(() => {
-        countRef.current++
-        return () => countRef.current--
+    const counterRef = useRef(0)
+    const counterFx = useRef(() => {
+        counterRef.current++
+        return () => {
+            counterRef.current--
+        }
     }).current
 
-    const parentGatherer = useContext(ctx)
-    useLayoutEffect(parentGatherer, [])
+    const parentCounterFx = useContext(ctx)
+    useLayoutEffect(parentCounterFx, [])
 
     const curr = useLocation()
     const prev = usePrevious(curr)
@@ -26,7 +28,7 @@ export default function Refreshable({ children, on }: { children?: ReactNode; on
         prev.key !== curr.key
 
     useLayoutEffect(() => {
-        if (countRef.current === 0 && isRefreshRender) {
+        if (counterRef.current === 0 && isRefreshRender) {
             setIsBlank(true)
             on?.()
         } else if (isBlank) {
@@ -34,5 +36,5 @@ export default function Refreshable({ children, on }: { children?: ReactNode; on
         }
     }, [isRefreshRender, isBlank])
 
-    return <ctx.Provider value={currGatherer}>{isBlank || children}</ctx.Provider>
+    return <ctx.Provider value={counterFx}>{isBlank || children}</ctx.Provider>
 }

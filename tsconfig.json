@@ -5,6 +5,7 @@
         "moduleResolution": "node",
         "strict": true,
         "jsx": "react",
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true
     }
 }
