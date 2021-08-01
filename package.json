@@ -25,7 +25,7 @@
     },
     "scripts": {
         "test": "jest",
-        "testw": "jest -i --watch",
+        "testw": "jest --watch",
         "clean": "rm -rf dist",
         "build": "pnpm build:esm && pnpm build:cjs",
         "build:cjs": "tsc -p cjs/tsconfig.json",

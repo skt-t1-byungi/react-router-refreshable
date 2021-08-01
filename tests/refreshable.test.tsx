@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, PropsWithChildren } from 'react'
-import { Router, Route } from 'react-router-dom'
+import React from 'react'
 import { render, act } from '@testing-library/react'
-import { createMemoryHistory } from 'history'
 import Refreshable from '../src/index'
+import { createWrapper, expectLifecycleTrack, Lifecycle } from './utils'
 
 test('no refreshable, no remount', () => {
     const track = jest.fn()
@@ -61,35 +60,3 @@ test('if have a child refreshable, parent refreshable is paused', () => {
     act(() => history.push('/'))
     expectLifecycleTrack(track3, ['update', 'unmount', 'mount'])
 })
-
-function expectLifecycleTrack(tracker: jest.Mock, inputs: Array<'mount' | 'unmount' | 'update'>) {
-    expect(tracker).toBeCalledTimes(inputs.length)
-    inputs.forEach((input, idx) => expect(tracker).toHaveBeenNthCalledWith(idx + 1, input))
-}
-
-function createWrapper({ path = '/' } = {}) {
-    const history = createMemoryHistory({ initialEntries: [path] })
-    function Wrapper({ children }: PropsWithChildren<{}>) {
-        return (
-            <Router history={history}>
-                <Route path={path}>{children}</Route>
-            </Router>
-        )
-    }
-    return { Wrapper, history }
-}
-
-function Lifecycle({ tracker, children }: PropsWithChildren<{ tracker: (event: string) => void }>) {
-    const mountedRef = useRef(false)
-    const trackerRef = useRef(tracker)
-    trackerRef.current = tracker
-    useEffect(() => {
-        if (mountedRef.current) trackerRef.current('update')
-    })
-    useEffect(() => {
-        mountedRef.current = true
-        trackerRef.current('mount')
-        return () => trackerRef.current('unmount')
-    }, [])
-    return <>{children}</>
-}
