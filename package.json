@@ -52,6 +52,7 @@
         "react-router-dom": "^5.2.0"
     },
     "dependencies": {
+        "use-force-update": "^1.0.7",
         "use-previous": "^1.1.0"
     }
 }

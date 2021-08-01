@@ -14,9 +14,11 @@ specifiers:
   react-router-dom: ^5.2.0
   ts-jest: ^27.0.4
   typescript: ^4.3.5
+  use-force-update: ^1.0.7
   use-previous: ^1.1.0
 
 dependencies:
+  use-force-update: 1.0.7
   use-previous: 1.1.0_5801e6465414ef85acbf5710ce4c0dcf
 
 devDependencies:
@@ -2848,6 +2850,10 @@ packages:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
     engines: {node: '>= 4.0.0'}
     dev: true
+
+  /use-force-update/1.0.7:
+    resolution: {integrity: sha512-k5dppYhO+I5X/cd7ildbrzeMZJkWwdAh5adaIk0qKN2euh7J0h2GBGBcB4QZ385eyHHnp7LIygvebdRx3XKdwA==}
+    dev: false
 
   /use-isomorphic-layout-effect/1.1.1_5801e6465414ef85acbf5710ce4c0dcf:
     resolution: {integrity: sha512-L7Evj8FGcwo/wpbv/qvSfrkHFtOpCzvM5yl2KVyDJoylVuSvzphiiasmjgQPttIGBAy2WKiBNR98q8w7PiNgKQ==}
