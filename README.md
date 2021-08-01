@@ -19,7 +19,6 @@ import Refreshable from 'react-router-refreshable'
 ```
 
 ```jsx
-//...
 <Layout>
     <Refreshable>
         <Switch>
@@ -40,8 +39,8 @@ Each page may have different areas to expect to refresh. Nested Refreshables can
 ```jsx
 <Refreshable>
     <Route path="/teams/:teamId">
+        {/* 👇 This component is not refreshed when '/teams/:teamId/users'. */}
         <TeamsContentLayout>
-            {/* 👈 This component is not refreshed when '/teams/:teamId/users'. */}
             <Refreshable>
                 <Route path="/teams/:teamId/users">
                     <TeamUsersPage />
