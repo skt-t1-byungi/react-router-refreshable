@@ -1,10 +1,13 @@
-import React, { ReactNode, useLayoutEffect, useState, createContext, useRef, useContext } from 'react'
+import React, { PropsWithChildren, useLayoutEffect, useState, createContext, useRef, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import usePrevious from 'use-previous'
 
 const ctx = createContext(() => {})
 
-export default function Refreshable({ children, on }: { children?: ReactNode; on?: () => void }) {
+export default function Refreshable({ children, on }: PropsWithChildren<{ on?: () => void }>) {
+    const listenerRef = useRef(on)
+    listenerRef.current = on
+
     const counterRef = useRef(0)
     const counterFx = useRef(() => {
         counterRef.current++
@@ -30,7 +33,7 @@ export default function Refreshable({ children, on }: { children?: ReactNode; on
     useLayoutEffect(() => {
         if (counterRef.current === 0 && isRefreshRender) {
             setIsBlank(true)
-            on?.()
+            listenerRef.current?.()
         } else if (isBlank) {
             setIsBlank(false)
         }
