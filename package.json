@@ -1,20 +1,39 @@
 {
     "name": "react-router-refreshable",
-    "description": "",
-    "version": "0.0.0",
-    "main": "index.js",
+    "description": "Supports refresh (remount) on react-router-dom",
+    "version": "0.0.1",
+    "keywords": [
+        "react",
+        "react-router",
+        "react-router-dom",
+        "refresh",
+        "reload"
+    ],
     "repository": "https://github.com/skt-t1-byungi/react-router-refreshable.git",
     "author": "skt-t1-byungi <tiniwz@gmail.com>",
+    "license": "MIT",
+    "main": "dist/cjs/index.js",
+    "module": "dist/esm/index.js",
+    "exports": {
+        ".": {
+            "require": "./dist/cjs/index.js",
+            "import": "./dist/esm/index.js"
+        }
+    },
     "scripts": {
         "test": "jest",
-        "testw": "jest -i --watch"
+        "testw": "jest -i --watch",
+        "clean": "rm -rf dist",
+        "build": "pnpm run -p build:esm && pnpm run -p build:cjs",
+        "build:cjs": "tsc -p cjs/tsconfig.json",
+        "build:esm": "tsc -p tsconfig.esm.json",
+        "prepublishOnly": "pnpm test && pnpm clean && pnpm build"
     },
-    "keywords": [],
-    "license": "MIT",
     "devDependencies": {
         "@testing-library/react": "^12.0.0",
         "@types/jest": "^26.0.24",
         "@types/react": "^17.0.15",
+        "@types/react-dom": "^17.0.9",
         "@types/react-router-dom": "^5.1.8",
         "history": "^4",
         "jest": "^27.0.6",
