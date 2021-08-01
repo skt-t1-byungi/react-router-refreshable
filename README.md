@@ -38,7 +38,7 @@ When the user clicks on a link with the same address as the current address on t
 
 The `Refreshable` component of `react-router-refreshable` remounts `children` when `history.push` to the same address. It is possible to efficiently provide the user's expected result.
 
-**[Demo](https://codesandbox.io/s/react-router-refreshable-demo-cw8gj?file=/src/App.js)**
+See a **[Demo](https://codesandbox.io/s/react-router-refreshable-demo-cw8gj?file=/src/App.js)**
 
 ### Nested Refreshable
 

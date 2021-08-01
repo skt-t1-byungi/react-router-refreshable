@@ -10,6 +10,7 @@
         "reload"
     ],
     "repository": "https://github.com/skt-t1-byungi/react-router-refreshable.git",
+    "homepage": "https://github.com/skt-t1-byungi/react-router-refreshable",
     "author": "skt-t1-byungi <tiniwz@gmail.com>",
     "license": "MIT",
     "files": [
