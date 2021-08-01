@@ -34,7 +34,7 @@ test('if have a child refreshable, parent refreshable is paused', () => {
     const track1 = jest.fn()
     const track2 = jest.fn()
     const { Wrapper, history } = createWrapper()
-    render(
+    const { rerender } = render(
         <Wrapper>
             <Refreshable>
                 <Lifecycle tracker={track1}>
@@ -48,6 +48,18 @@ test('if have a child refreshable, parent refreshable is paused', () => {
     act(() => history.push('/'))
     expectLifecycleTrack(track1, ['mount'])
     expectLifecycleTrack(track2, ['mount', 'unmount', 'mount'])
+
+    const track3 = jest.fn()
+    rerender(
+        <Wrapper>
+            <Refreshable>
+                <Lifecycle tracker={track3} />
+            </Refreshable>
+        </Wrapper>
+    )
+    expectLifecycleTrack(track3, ['update'])
+    act(() => history.push('/'))
+    expectLifecycleTrack(track3, ['update', 'unmount', 'mount'])
 })
 
 function expectLifecycleTrack(tracker: jest.Mock, inputs: Array<'mount' | 'unmount' | 'update'>) {
@@ -68,17 +80,16 @@ function createWrapper({ path = '/' } = {}) {
 }
 
 function Lifecycle({ tracker, children }: PropsWithChildren<{ tracker: (event: string) => void }>) {
+    const mountedRef = useRef(false)
+    const trackerRef = useRef(tracker)
+    trackerRef.current = tracker
     useEffect(() => {
-        tracker('mount')
-        return () => tracker('unmount')
-    }, [])
-    const ref = useRef(false)
-    useEffect(() => {
-        if (ref.current) {
-            tracker('update')
-        } else {
-            ref.current = true
-        }
+        if (mountedRef.current) trackerRef.current('update')
     })
+    useEffect(() => {
+        mountedRef.current = true
+        trackerRef.current('mount')
+        return () => trackerRef.current('unmount')
+    }, [])
     return <>{children}</>
 }
