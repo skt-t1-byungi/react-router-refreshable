@@ -24,7 +24,7 @@
         "test": "jest",
         "testw": "jest -i --watch",
         "clean": "rm -rf dist",
-        "build": "pnpm run -p build:esm && pnpm run -p build:cjs",
+        "build": "pnpm run build:esm && pnpm run build:cjs",
         "build:cjs": "tsc -p cjs/tsconfig.json",
         "build:esm": "tsc -p tsconfig.esm.json",
         "prepublishOnly": "pnpm test && pnpm clean && pnpm build"
