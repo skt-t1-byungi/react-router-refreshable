@@ -39,7 +39,7 @@ Each page may have different areas to expect to refresh. Nested Refreshables can
 ```jsx
 <Refreshable>
     <Route path="/teams/:teamId">
-        {/* 👇 This component is not refreshed when '/teams/:teamId/users'. */}
+        {/* 👇 This component is not refreshed when '/teams/:teamId/*'. */}
         <TeamsContentLayout>
             <Refreshable>
                 <Route path="/teams/:teamId/users">
