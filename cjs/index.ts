@@ -1,3 +1,3 @@
-import Refreshable from '../src'
+import Refreshable, { useIsRefreshingRef } from '../src'
 
-export = Refreshable
+export = { Refreshable, useIsRefreshingRef }

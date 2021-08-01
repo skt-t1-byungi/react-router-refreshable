@@ -8,7 +8,9 @@ const ctx = createContext({
     counterFx() {},
 })
 
-export default function Refreshable({ children, on }: PropsWithChildren<{ on?: () => void }>) {
+export default Refreshable
+
+export function Refreshable({ children, on }: PropsWithChildren<{ on?: () => void }>) {
     const counterRef = useRef(0)
     const isRefreshingRef = useRef(false)
     const currCtxValue = useRef({
