@@ -11,7 +11,7 @@ const ctx = createContext({
 export default function Refreshable({ children, on }: PropsWithChildren<{ on?: () => void }>) {
     const counterRef = useRef(0)
     const isRefreshingRef = useRef(false)
-    const currentCtx = useRef({
+    const currCtxValue = useRef({
         isRefreshingRef,
         counterFx() {
             counterRef.current++
@@ -21,8 +21,8 @@ export default function Refreshable({ children, on }: PropsWithChildren<{ on?: (
         },
     }).current
 
-    const parentCtx = useContext(ctx)
-    useLayoutEffect(parentCtx.counterFx, [])
+    const parentCtxValue = useContext(ctx)
+    useLayoutEffect(parentCtxValue.counterFx, [])
 
     const curr = useLocation()
     const prev = usePrevious(curr)
@@ -38,7 +38,6 @@ export default function Refreshable({ children, on }: PropsWithChildren<{ on?: (
     if (isRefreshRender) {
         isRefreshingRef.current = true
     }
-
     // Parent hook runs later than child hook
     useEffect(() => {
         if (!isRefreshRender && isRefreshingRef.current) {
@@ -57,7 +56,7 @@ export default function Refreshable({ children, on }: PropsWithChildren<{ on?: (
         }
     }, [isRefreshRender])
 
-    return <ctx.Provider value={currentCtx}>{isRefreshRender || children}</ctx.Provider>
+    return <ctx.Provider value={currCtxValue}>{isRefreshRender || children}</ctx.Provider>
 }
 
 export function useIsRefreshingRef() {
