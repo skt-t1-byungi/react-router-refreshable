@@ -10,9 +10,8 @@ const ctx = createContext({
 
 export default function Refreshable({ children, on }: PropsWithChildren<{ on?: () => void }>) {
     const counterRef = useRef(0)
-
     const isRefreshingRef = useRef(false)
-    const currCtxRef = useRef({
+    const currentCtx = useRef({
         isRefreshingRef,
         counterFx() {
             counterRef.current++
@@ -56,7 +55,7 @@ export default function Refreshable({ children, on }: PropsWithChildren<{ on?: (
         }
     }, [isRefreshRender])
 
-    return <ctx.Provider value={currCtxRef}>{isRefreshRender || children}</ctx.Provider>
+    return <ctx.Provider value={currentCtx}>{isRefreshRender || children}</ctx.Provider>
 }
 
 export function useIsRefreshingRef() {
