@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, act } from '@testing-library/react'
 import { createWrapper, expectLifecycleTrack, Lifecycle } from './utils'
-import Refreshable, { useIsRefreshingRef } from '../src/index'
+import { Refreshable, useIsRefreshingRef } from '../src/index'
 
 test('isRefreshing', () => {
     const track = jest.fn()

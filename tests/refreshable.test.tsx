@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, act } from '@testing-library/react'
-import Refreshable from '../src/index'
+import { Refreshable } from '../src/index'
 import { createWrapper, expectLifecycleTrack, Lifecycle } from './utils'
 
 test('no refreshable, no remount', () => {
