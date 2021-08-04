@@ -39,7 +39,7 @@ import { Refreshable } from 'react-router-refreshable'
 
 When the user clicks on a link with the same url as the current url on the react-router, nothing happens. However, most users expect the page to refresh. Solving with `location.reload()` (or `<BrowserRouter forceRefresh />`) is wasteful.
 
-The `Refreshable` component of `react-router-refreshable` remounts `children` when `history.push` to the same address. It is possible to efficiently provide the user's expected result.
+The `Refreshable` component of `react-router-refreshable` remounts `children` when `history.push` to the same url. It is possible to efficiently provide the user's expected result.
 
 See a **[Demo](https://codesandbox.io/s/react-router-refreshable-demo-cw8gj?file=/src/App.js)**
 
