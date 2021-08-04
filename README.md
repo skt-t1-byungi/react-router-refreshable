@@ -6,7 +6,6 @@ Supports refresh (remount) on react-router-dom
 [![license](https://flat.badgen.net/github/license/skt-t1-byungi/react-router-refreshable)](https://github.com/skt-t1-byungi/react-router-refreshable/blob/master/LICENSE)
 [![test](https://github.com/skt-t1-byungi/react-router-refreshable/actions/workflows/test.yml/badge.svg)](https://github.com/skt-t1-byungi/react-router-refreshable/actions/workflows/test.yml)
 
-
 ## Install
 
 ```sh
@@ -50,15 +49,18 @@ Each page may have different areas to expect to refresh. Nested Refreshables can
 ```jsx
 <Refreshable>
     <Route path="/teams/:teamId">
-        {/* 👇 This component is not refreshed when '/teams/:teamId/*'. */}
+        {/* 👇 This component is not refreshed. */}
         <TeamsContentLayout>
             <Refreshable>
-                <Route path="/teams/:teamId/users">
-                    <TeamUsersPage />
-                </Route>
+                <TeamPageHeader /> {/* 👈 This component can be refreshed. */}
+            </Refreshable>
+            {/* ... */}
+            <Refreshable>
+                <TeamPageContent /> {/* 👈 This component can be refreshed. */}
             </Refreshable>
         </TeamsContentLayout>
     </Route>
+    {/*...*/}
 </Refreshable>
 ```
 
