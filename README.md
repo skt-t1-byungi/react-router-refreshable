@@ -3,6 +3,9 @@
 Supports refresh (remount) on react-router-dom
 
 [![version](https://flat.badgen.net/npm/v/react-router-refreshable)](https://www.npmjs.com/package/react-router-refreshable)
+[![license](https://flat.badgen.net/github/license/skt-t1-byungi/react-router-refreshable)](https://github.com/skt-t1-byungi/react-router-refreshable/blob/master/LICENSE)
+![test](https://github.com/skt-t1-byungi/react-router-refreshable/actions/workflows/test.yml/badge.svg)
+
 
 ## Install
 
